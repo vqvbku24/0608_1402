@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Nami 🧸💖</title>
+    <style>
+        /* ========== RESET & BASE STYLES ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', 'Segoe UI', cursive, sans-serif;
+            background: linear-gradient(135deg, #ffc4dd 0%, #ffd4b8 50%, #fff5e6 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><text y="20" font-size="20">🧸</text></svg>'), auto;
+        }
+
+        /* ========== SPARKLE OVERLAY ========== */
+        .sparkles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+            animation: sparkle 3s infinite;
+            opacity: 0;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        /* ========== FLOATING BACKGROUND ELEMENTS ========== */
+        .float-element {
+            position: absolute;
+            pointer-events: none;
+            user-select: none;
+            animation: floatAround 20s infinite ease-in-out;
+            opacity: 0.3;
+        }
+
+        @keyframes floatAround {
+            0%, 100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            25% {
+                transform: translate(50px, -50px) rotate(90deg);
+            }
+            50% {
+                transform: translate(0, -100px) rotate(180deg);
+            }
+            75% {
+                transform: translate(-50px, -50px) rotate(270deg);
+            }
+        }
+
+        /* ========== BOUNCING CORNER TEDDY ========== */
+        .corner-teddy {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            font-size: 60px;
+            animation: bounce 2s infinite;
+            z-index: 5;
+            filter: drop-shadow(0 4px 8px rgba(255, 182, 193, 0.5));
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* ========== MAIN CONTAINER ========== */
+        .container {
+            text-align: center;
+            z-index: 10;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 40px;
+            box-shadow: 0 10px 40px rgba(255, 182, 193, 0.4);
+            max-width: 600px;
+            width: 90%;
+            backdrop-filter: blur(10px);
+            border: 4px solid rgba(255, 192, 203, 0.5);
+            animation: containerPop 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        @keyframes containerPop {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* ========== TITLE & TEXT STYLES ========== */
+        .title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            color: #ff6b9d;
+            margin-bottom: 20px;
+            font-weight: 900;
+            text-shadow: 3px 3px 6px rgba(255, 182, 193, 0.4);
+            animation: titleWiggle 1s ease;
+            letter-spacing: 2px;
+        }
+
+        @keyframes titleWiggle {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-2deg); }
+            75% { transform: rotate(2deg); }
+        }
+
+        .subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: #ff8fab;
+            margin-bottom: 30px;
+            animation: fadeIn 1s ease 0.3s backwards;
+        }
+
+        .question {
+            font-size: clamp(1.5rem, 4vw, 2.2rem);
+            color: #d4567a;
+            margin-bottom: 40px;
+            font-weight: 700;
+            opacity: 0;
+            animation: fadeInScale 1s ease 2s forwards;
+            text-shadow: 2px 2px 4px rgba(255, 182, 193, 0.3);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* ========== BUTTON CONTAINER ========== */
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            position: relative;
+            min-height: 100px;
+            opacity: 0;
+            animation: fadeIn 1s ease 3s forwards;
+        }
+
+        /* ========== BUTTON BASE STYLES ========== */
+        button {
+            padding: 20px 50px;
+            font-size: clamp(1.2rem, 3vw, 1.6rem);
+            border: 4px solid;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 800;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 0 6px 20px rgba(255, 107, 157, 0.3);
+            font-family: 'Comic Sans MS', cursive;
+            letter-spacing: 1px;
+        }
+
+        /* ========== YES BUTTON ========== */
+        .yes-btn {
+            background: linear-gradient(135deg, #ff8fab 0%, #ff6b9d 100%);
+            color: white;
+            border-color: #ff5588;
+            animation: pulseGlow 2s infinite;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% {
+                box-shadow: 0 6px 20px rgba(255, 107, 157, 0.3);
+            }
+            50% {
+                box-shadow: 0 6px 30px rgba(255, 107, 157, 0.6);
+            }
+        }
+
+        .yes-btn:hover {
+            transform: scale(1.15) rotate(-3deg);
+            box-shadow: 0 8px 30px rgba(255, 107, 157, 0.5);
+        }
+
+        /* ========== NO BUTTON ========== */
+        .no-btn {
+            background: linear-gradient(135deg, #ffd4e5 0%, #ffc4dd 100%);
+            color: #ff6b9d;
+            border-color: #ffb3d9;
+            position: absolute;
+            transition: all 0.15s ease;
+        }
+
+        /* ========== FLOATING TEXT ========== */
+        .float-text {
+            position: fixed;
+            font-size: clamp(1rem, 2.5vw, 1.4rem);
+            color: #ff6b9d;
+            font-weight: 700;
+            pointer-events: none;
+            animation: floatUp 2s ease-out forwards;
+            z-index: 100;
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
+        }
+
+        @keyframes floatUp {
+            0% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100px);
+            }
+        }
+
+        /* ========== SUCCESS SCREEN ========== */
+        .success-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, #ffb3d9 0%, #ffc4dd 50%, #ffd4e5 100%);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+        }
+
+        .success-screen.show {
+            display: flex;
+            animation: glowFadeIn 1s ease forwards;
+        }
+
+        @keyframes glowFadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        .success-content {
+            text-align: center;
+            padding: 40px;
+            animation: successPop 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            position: relative;
+        }
+
+        @keyframes successPop {
+            0% {
+                transform: scale(0) rotate(-180deg);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+        }
+
+        .success-message {
+            font-size: clamp(1.8rem, 5vw, 3.5rem);
+            color: #ff1493;
+            font-weight: 900;
+            margin-bottom: 30px;
+            text-shadow: 4px 4px 8px rgba(255, 20, 147, 0.3);
+            line-height: 1.4;
+            animation: wiggle 1s ease infinite;
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-1deg); }
+            50% { transform: rotate(1deg); }
+        }
+
+        .giant-teddy {
+            font-size: clamp(120px, 20vw, 200px);
+            animation: teddySpin 3s ease-in-out infinite;
+            filter: drop-shadow(0 10px 30px rgba(255, 107, 157, 0.5));
+        }
+
+        @keyframes teddySpin {
+            0%, 100% { transform: rotate(-5deg) scale(1); }
+            50% { transform: rotate(5deg) scale(1.1); }
+        }
+
+        /* ========== FLYING TEDDY BEARS ========== */
+        .flying-teddy {
+            position: absolute;
+            font-size: 50px;
+            animation: flyAcross 5s linear forwards;
+            opacity: 0;
+        }
+
+        @keyframes flyAcross {
+            0% {
+                opacity: 0;
+                transform: translate(-100px, 0) rotate(0deg);
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translate(calc(100vw + 100px), -300px) rotate(360deg);
+            }
+        }
+
+        /* ========== POPPING HEARTS ========== */
+        .pop-heart {
+            position: absolute;
+            font-size: 40px;
+            animation: popHeart 1.5s ease-out forwards;
+            opacity: 0;
+        }
+
+        @keyframes popHeart {
+            0% {
+                opacity: 0;
+                transform: scale(0);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.5);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0.5) translateY(-200px);
+            }
+        }
+
+        /* ========== MOBILE RESPONSIVE ========== */
+        @media (max-width: 600px) {
+            .container {
+                padding: 30px 20px;
+            }
+
+            button {
+                padding: 16px 40px;
+            }
+
+            .button-container {
+                gap: 20px;
+            }
+
+            .corner-teddy {
+                font-size: 40px;
+                bottom: 10px;
+                right: 10px;
+            }
+        }
+
+        /* ========== LOADING ANIMATION ========== */
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sparkle overlay -->
+    <div class="sparkles" id="sparkles"></div>
+
+    <!-- Floating background elements -->
+    <div id="floatingElements"></div>
+
+    <!-- Bouncing corner teddy -->
+    <div class="corner-teddy">🧸</div>
+
+    <!-- Main container -->
+    <div class="container" id="mainContainer">
+        <h1 class="title">Hey Nami 🧸💖</h1>
+        <p class="subtitle">I have something important to ask you...</p>
+        <p class="question" id="question">Will you continue to be my little cute baby?</p>
+        
+        <div class="button-container" id="buttonContainer">
+            <button class="yes-btn" id="yesBtn">YES 🧸💘</button>
+            <button class="no-btn" id="noBtn">NO 🥺</button>
+        </div>
+    </div>
+
+    <!-- Success screen -->
+    <div class="success-screen" id="successScreen">
+        <div class="success-content">
+            <div class="giant-teddy">🧸</div>
+            <div class="success-message">
+                YAYYY, yêu bé Nami nhất 🧸💖<br>
+                Bé vừa làm một anh chàng ở VN cảm thấy hạnh phúc, moawx3000!
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ========== VARIABLES ==========
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+        const mainContainer = document.getElementById('mainContainer');
+        const successScreen = document.getElementById('successScreen');
+        const buttonContainer = document.getElementById('buttonContainer');
+        
+        let noBtnScale = 1;
+        let clickCount = 0;
+        
+        // Cute Vietnamese phrases that appear when hovering NO button
+        const cuteTexts = [
+            "hay quó hooooo 🧸",
+            "Anh pùn ó🥺",
+            "Gấu papaya pùn ó💔",
+            "Mún dùy đây hỏ💗",
+            "Tui khóc mới chịu  hem 😢🧸",
+            "có ông nào rồi chứ dùy, huhu💔",
+            "Tôi cho bé cơ hội thử lại🧸💕"
+        ];
+
+        // ========== CREATE SPARKLES ==========
+        function createSparkles() {
+            const sparklesContainer = document.getElementById('sparkles');
+            
+            for (let i = 0; i < 50; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.style.left = Math.random() * 100 + '%';
+                sparkle.style.top = Math.random() * 100 + '%';
+                sparkle.style.animationDelay = Math.random() * 3 + 's';
+                sparklesContainer.appendChild(sparkle);
+            }
+        }
+
+        // ========== CREATE FLOATING BACKGROUND ELEMENTS ==========
+        function createFloatingElements() {
+            const container = document.getElementById('floatingElements');
+            const elements = ['🧸', '💗', '🧸', '💕', '🧸', '💖', '🧸', '💝'];
+            
+            for (let i = 0; i < 20; i++) {
+                const elem = document.createElement('div');
+                elem.className = 'float-element';
+                elem.textContent = elements[Math.floor(Math.random() * elements.length)];
+                elem.style.left = Math.random() * 100 + '%';
+                elem.style.top = Math.random() * 100 + '%';
+                elem.style.fontSize = (Math.random() * 30 + 20) + 'px';
+                elem.style.animationDelay = Math.random() * 20 + 's';
+                elem.style.animationDuration = (Math.random() * 10 + 15) + 's';
+                container.appendChild(elem);
+            }
+        }
+
+        // ========== MOVE NO BUTTON ==========
+        function moveNoButton() {
+            clickCount++;
+            
+            // Calculate safe boundaries
+            const maxX = window.innerWidth - noBtn.offsetWidth - 40;
+            const maxY = window.innerHeight - noBtn.offsetHeight - 40;
+            const minX = 20;
+            const minY = 20;
+            
+            // Generate random position
+            const randomX = Math.random() * (maxX - minX) + minX;
+            const randomY = Math.random() * (maxY - minY) + minY;
+            
+            // Apply position
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
+            
+            // Shrink button
+            noBtnScale = Math.max(0.4, noBtnScale - 0.1);
+            noBtn.style.transform = `scale(${noBtnScale})`;
+            
+            // Show cute text
+            showFloatingText(randomX, randomY);
+        }
+
+        // ========== SHOW FLOATING TEXT ==========
+        function showFloatingText(x, y) {
+            const text = document.createElement('div');
+            text.className = 'float-text';
+            text.textContent = cuteTexts[Math.floor(Math.random() * cuteTexts.length)];
+            text.style.left = x + 'px';
+            text.style.top = (y - 50) + 'px';
+            document.body.appendChild(text);
+            
+            setTimeout(() => text.remove(), 2000);
+        }
+
+        // ========== CREATE FLYING TEDDIES ==========
+        function createFlyingTeddies() {
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const teddy = document.createElement('div');
+                    teddy.className = 'flying-teddy';
+                    teddy.textContent = '🧸';
+                    teddy.style.left = '-100px';
+                    teddy.style.top = Math.random() * window.innerHeight + 'px';
+                    teddy.style.animationDelay = '0s';
+                    teddy.style.animationDuration = (Math.random() * 2 + 3) + 's';
+                    document.body.appendChild(teddy);
+                    
+                    setTimeout(() => teddy.remove(), 6000);
+                }, i * 150);
+            }
+        }
+
+        // ========== CREATE POPPING HEARTS ==========
+        function createPoppingHearts() {
+            const hearts = ['💗', '💕', '💖', '💝', '💓', '💞'];
+            
+            for (let i = 0; i < 40; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'pop-heart';
+                    heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                    heart.style.left = Math.random() * window.innerWidth + 'px';
+                    heart.style.top = window.innerHeight / 2 + 'px';
+                    document.body.appendChild(heart);
+                    
+                    setTimeout(() => heart.remove(), 1500);
+                }, i * 100);
+            }
+        }
+
+        // ========== CREATE CONTINUOUS FLOATING HEARTS IN SUCCESS ==========
+        function createSuccessFloatingHearts() {
+            const interval = setInterval(() => {
+                const heart = document.createElement('div');
+                heart.className = 'pop-heart';
+                heart.textContent = ['💗', '💕', '💖', '💝'][Math.floor(Math.random() * 4)];
+                heart.style.left = Math.random() * window.innerWidth + 'px';
+                heart.style.top = Math.random() * window.innerHeight + 'px';
+                document.body.appendChild(heart);
+                
+                setTimeout(() => heart.remove(), 1500);
+            }, 300);
+            
+            // Store interval so we can clear it if needed
+            successScreen.dataset.heartInterval = interval;
+        }
+
+        // ========== YES BUTTON HANDLER ==========
+        yesBtn.addEventListener('click', () => {
+            // Hide main container
+            mainContainer.style.opacity = '0';
+            mainContainer.style.transform = 'scale(0.8)';
+            mainContainer.style.transition = 'all 0.5s ease';
+            
+            setTimeout(() => {
+                mainContainer.style.display = 'none';
+                successScreen.classList.add('show');
+                createFlyingTeddies();
+                createPoppingHearts();
+                createSuccessFloatingHearts();
+            }, 500);
+        });
+
+        // ========== NO BUTTON HANDLERS ==========
+        noBtn.addEventListener('mouseenter', moveNoButton);
+        
+        noBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            moveNoButton();
+        });
+
+        // Touch support for mobile
+        noBtn.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            moveNoButton();
+        });
+
+        // Prevent context menu
+        noBtn.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+            moveNoButton();
+        });
+
+        // ========== INITIALIZE ==========
+        createSparkles();
+        createFloatingElements();
+
+        // Add extra teddy bears when page loads
+        setTimeout(() => {
+            const extraTeddy1 = document.createElement('div');
+            extraTeddy1.className = 'float-element';
+            extraTeddy1.textContent = '🧸';
+            extraTeddy1.style.fontSize = '50px';
+            extraTeddy1.style.left = '10%';
+            extraTeddy1.style.top = '20%';
+            extraTeddy1.style.opacity = '0.4';
+            document.getElementById('floatingElements').appendChild(extraTeddy1);
+            
+            const extraTeddy2 = document.createElement('div');
+            extraTeddy2.className = 'float-element';
+            extraTeddy2.textContent = '🧸';
+            extraTeddy2.style.fontSize = '40px';
+            extraTeddy2.style.left = '85%';
+            extraTeddy2.style.top = '70%';
+            extraTeddy2.style.opacity = '0.4';
+            document.getElementById('floatingElements').appendChild(extraTeddy2);
+        }, 1000);
+
+        // ========== CURSOR TRAIL EFFECT (Teddy bear follows cursor) ==========
+        let cursorTrail = [];
+        const maxTrail = 3;
+
+        document.addEventListener('mousemove', (e) => {
+            // Only create trail occasionally to avoid performance issues
+            if (Math.random() > 0.9) {
+                const trail = document.createElement('div');
+                trail.textContent = '🧸';
+                trail.style.position = 'fixed';
+                trail.style.left = e.clientX + 'px';
+                trail.style.top = e.clientY + 'px';
+                trail.style.fontSize = '20px';
+                trail.style.pointerEvents = 'none';
+                trail.style.zIndex = '9999';
+                trail.style.opacity = '0.6';
+                trail.style.transition = 'all 1s ease';
+                document.body.appendChild(trail);
+                
+                // Fade out and remove
+                setTimeout(() => {
+                    trail.style.opacity = '0';
+                    trail.style.transform = 'scale(0)';
+                }, 100);
+                
+                setTimeout(() => trail.remove(), 1100);
+            }
+        });
+
+        // ========== MAKE YES BUTTON GROW SLIGHTLY WHEN NO BUTTON IS CLICKED ==========
+        let yesGrowth = 1;
+        const originalNoMove = moveNoButton;
+        moveNoButton = function() {
+            originalNoMove();
+            yesGrowth = Math.min(1.3, yesGrowth + 0.05);
+            yesBtn.style.transform = `scale(${yesGrowth})`;
+        };
+    </script>
+</body>
+</html>
